@@ -3,77 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rummy Family — Game Viewer</title>
+<title>Rummy Family</title>
 <style>
-:root{
-  --red-bg:#fdecea; --red-border:#e57373; --red-head:#c62828;
-  --green-bg:#e8f5e9; --green-border:#81c784; --green-head:#2e7d32;
-  --blue-bg:#e3f2fd; --blue-border:#64b5f6; --blue-head:#1565c0;
-  --bg:#f4f5f7; --card-bg:#ffffff; --text:#1c1c1e; --muted:#6b7280; --border:#d9dde3;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+:root {
+    --bg:#090706; --surface:#12100e; --surface2:#181411; --surface3:#201a16;
+    --border:#30251f; --border-light:#3a2c24; --border-focus:#ff4d00;
+    --accent:#ff4d00; --accent-hover:#ff5a0a; --accent-dim:rgba(255,77,0,0.12); --accent-glow:rgba(255,77,0,0.28);
+    --success:#36c77a; --success-dim:rgba(54,199,122,0.12); --danger:#ff4d4d; --warning:#ff9d2e;
+    --text-primary:#f5f2ef; --text-secondary:#a39b95; --text-muted:#6b625c; --text-dark:#3f3935;
+    --orange:#ff4d00; --orange-bright:#ff5b0a; --orange-dark:#c83b00;
+    --sans:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+    --radius:12px; --radius-sm:8px; --radius-lg:16px;
+    --shadow:0 10px 30px rgba(0,0,0,0.45); --shadow-orange:0 0 30px rgba(255,77,0,0.18);
+    --container:1200px;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#15161a; --card-bg:#1f2024; --text:#f0f0f2; --muted:#9aa0a8; --border:#33353a;
-    --red-bg:#3a1f1f; --green-bg:#1c3324; --blue-bg:#1c2b3a;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#15161a; --card-bg:#1f2024; --text:#f0f0f2; --muted:#9aa0a8; --border:#33353a;
-  --red-bg:#3a1f1f; --green-bg:#1c3324; --blue-bg:#1c2b3a;
-}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;}
 *{box-sizing:border-box;}
-.wrap{max-width:900px;margin:0 auto;padding:20px 14px 40px;}
-h1{font-size:1.4rem;text-align:center;margin:6px 0 2px;}
-.sub{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:18px;}
-.box{border-radius:14px;border:2px solid; padding:14px 14px 18px; margin-bottom:20px; overflow-x:auto;}
-.box h2{margin:0 0 10px;font-size:1.05rem;}
-.box.blue{background:var(--blue-bg);border-color:var(--blue-border);}
-.box.blue h2{color:var(--blue-head);}
-.box.green{background:var(--green-bg);border-color:var(--green-border);}
-.box.green h2{color:var(--green-head);}
-.box.red{background:var(--red-bg);border-color:var(--red-border);}
-.box.red h2{color:var(--red-head);}
-table{border-collapse:collapse;width:100%;min-width:480px;font-size:.85rem;}
-th,td{border:1px solid var(--border);padding:6px 8px;text-align:center;white-space:nowrap;}
-th{background:rgba(0,0,0,.04);}
-input[type=text],input[type=number]{width:64px;padding:4px;border:1px solid var(--border);border-radius:6px;background:var(--card-bg);color:var(--text);font-size:.85rem;text-align:center;}
-input[type=text]{width:84px;font-weight:600;}
-.total-row td{font-weight:700;background:rgba(0,0,0,.05);}
-.controls{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;}
-button{border:none;border-radius:8px;padding:7px 12px;font-size:.8rem;font-weight:600;cursor:pointer;background:var(--card-bg);border:1px solid var(--border);color:var(--text);}
-button:hover{filter:brightness(0.95);}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text-primary);font-family:var(--sans);}
+.wrap{max-width:var(--container);margin:0 auto;padding:28px 16px 48px;}
+h1{font-size:1.6rem;font-weight:800;text-align:center;margin:6px 0 4px;letter-spacing:-.02em;}
+h1 .hot{color:var(--accent);text-shadow:0 0 22px var(--accent-glow);}
+.sub{text-align:center;color:var(--text-secondary);font-size:.85rem;margin-bottom:22px;font-family:var(--mono);}
+.box{border-radius:var(--radius-lg);border:1px solid var(--border);background:var(--surface);
+     padding:18px 18px 22px;margin-bottom:22px;overflow-x:auto;box-shadow:var(--shadow);}
+.box h2{margin:0 0 12px;font-size:1.02rem;font-weight:700;display:flex;align-items:center;gap:8px;}
+.box.blue{border-color:var(--border-focus);box-shadow:var(--shadow-orange);}
+.box.blue h2{color:var(--accent);}
+.box.green{border-color:var(--border-light);}
+.box.green h2{color:var(--success);}
+.box.red{border-color:var(--border-light);}
+.box.red h2{color:var(--danger);}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:.85rem;font-family:var(--mono);}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:center;white-space:nowrap;color:var(--text-primary);}
+th{background:var(--surface2);color:var(--text-secondary);font-weight:600;}
+input[type=text],input[type=number]{width:64px;padding:5px;border:1px solid var(--border-light);border-radius:var(--radius-sm);
+  background:var(--surface3);color:var(--text-primary);font-size:.85rem;text-align:center;font-family:var(--mono);}
+input[type=text]{width:84px;font-weight:700;color:var(--accent);}
+input:focus{outline:none;border-color:var(--border-focus);box-shadow:0 0 0 3px var(--accent-dim);}
+.total-row td{font-weight:700;background:var(--surface2);color:var(--accent);}
+.controls{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;}
+button{border-radius:var(--radius-sm);padding:8px 14px;font-size:.8rem;font-weight:700;cursor:pointer;
+  background:var(--surface2);border:1px solid var(--border-light);color:var(--text-primary);transition:.15s;}
+button:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 12px var(--accent-dim);}
 ol.rank{list-style:none;margin:0;padding:0;}
-ol.rank li{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:10px;background:var(--card-bg);margin-bottom:7px;font-weight:600;}
+ol.rank li{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:var(--radius);
+  background:var(--surface2);border:1px solid var(--border);margin-bottom:8px;font-weight:700;}
+ol.rank li:first-child{border-color:var(--accent);box-shadow:0 0 16px var(--accent-glow);}
 ol.rank li .medal{font-size:1.1rem;margin-right:8px;}
-ol.rank li .score{color:var(--blue-head);}
-.note{font-size:.75rem;color:var(--muted);margin-top:8px;}
+ol.rank li .score{color:var(--accent);font-family:var(--mono);}
+.note{font-size:.75rem;color:var(--text-muted);margin-top:10px;font-family:var(--mono);}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>🃏 Rummy Family — Game Viewer</h1>
-  <div class="sub">Round 1 &amp; the last round are auto-doubled — same formula as the sheet</div>
+  <h1>🃏 Rummy <span class="hot">Family</span></h1>
+  <div class="sub">Round 1 &amp; the last round are auto-doubled</div>
 
   <!-- BOX 1: RANK (blue) -->
   <div class="box blue">
-    <h2>🏆 Box 1 — RANK</h2>
+    <h2>🏆RANK</h2>
     <ol class="rank" id="rankList"></ol>
     <div class="note">Sorted lowest total first (lowest score wins in Rummy).</div>
   </div>
 
   <!-- BOX 2: Calculated scores (green) -->
   <div class="box green">
-    <h2>✅ Box 2 — Calculated Scores (formula applied)</h2>
+    <h2>✅Calculated Scores (formula applied)</h2>
     <table id="calcTable"></table>
   </div>
 
   <!-- BOX 3: Raw score entry (red) -->
   <div class="box red">
-    <h2>✏️ Box 3 — Raw Score Entry</h2>
+    <h2>✏️Raw Score Entry</h2>
     <table id="rawTable"></table>
     <div class="controls">
       <button onclick="addRound()">+ Add Round</button>
