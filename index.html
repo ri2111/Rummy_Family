@@ -3,272 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rishi — Artist Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Rummy Family — Game Viewer</title>
 <style>
-  :root{
-    --bg:#161009;
-    --surface:#221a10;
-    --surface-2:#2c2113;
-    --ink:#f3ead9;
-    --ink-dim:#c9bda3;
-    --accent:#cf9a3f;
-    --accent-dim:#8c6c2f;
-    --line:rgba(243,234,217,0.14);
-    box-sizing:border-box;
-    padding-top:env(safe-area-inset-top,0px);
-    padding-bottom:env(safe-area-inset-bottom,0px);
+:root{
+  --red-bg:#fdecea; --red-border:#e57373; --red-head:#c62828;
+  --green-bg:#e8f5e9; --green-border:#81c784; --green-head:#2e7d32;
+  --blue-bg:#e3f2fd; --blue-border:#64b5f6; --blue-head:#1565c0;
+  --bg:#f4f5f7; --card-bg:#ffffff; --text:#1c1c1e; --muted:#6b7280; --border:#d9dde3;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15161a; --card-bg:#1f2024; --text:#f0f0f2; --muted:#9aa0a8; --border:#33353a;
+    --red-bg:#3a1f1f; --green-bg:#1c3324; --blue-bg:#1c2b3a;
   }
-  *{box-sizing:inherit;}
-  html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Work Sans',sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,.display{
-    font-family:'Fraunces',serif;
-    font-weight:500;
-    letter-spacing:-0.01em;
-    margin:0;
-  }
-  a{color:inherit;}
-  .wrap{max-width:1040px;margin:0 auto;padding:0 28px;}
-
-  header.site{
-    position:relative; top:env(safe-area-inset-top,0px); z-index:10;
-    background:rgba(22,16,9,0.85);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;max-width:1040px;margin:0 auto;}
-  .nav .mark{font-family:'Fraunces',serif;font-size:1.15rem;}
-  .nav ul{list-style:none;display:flex;gap:26px;margin:0;padding:0;font-size:0.92rem;}
-  .nav a{text-decoration:none;color:var(--ink-dim);transition:color .2s;}
-  .nav a:hover{color:var(--accent);}
-
-  /* HERO */
-  .hero{padding:96px 0 72px;}
-  .hero .kicker{color:var(--accent);font-size:0.95rem;margin-bottom:18px;}
-  .hero h1{font-size:clamp(3.2rem,9vw,6.4rem);line-height:0.98;color:var(--ink);}
-  .hero .lede{max-width:560px;margin-top:26px;font-size:1.08rem;color:var(--ink-dim);}
-  .hero .lede b{color:var(--ink);font-weight:600;}
-  .hero .cta-row{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap;}
-  .btn{
-    display:inline-block;padding:13px 26px;border-radius:2px;
-    font-size:0.95rem;text-decoration:none;cursor:pointer;border:1px solid transparent;
-    transition:transform .15s ease, background .2s ease, border-color .2s ease;
-    font-family:'Work Sans',sans-serif; font-weight:500;
-  }
-  .btn:active{transform:translateY(1px);}
-  .btn-primary{background:var(--accent);color:#1a1206;}
-  .btn-primary:hover{background:#dfae55;}
-  .btn-ghost{border-color:var(--line);color:var(--ink);}
-  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
-
-  /* SKILLS */
-  .skills{padding:10px 0 70px;border-top:1px solid var(--line);}
-  .skills h2{font-size:0.95rem;color:var(--ink-dim);font-weight:400;margin-top:46px;margin-bottom:22px;}
-  .chip-row{display:flex;flex-wrap:wrap;gap:10px;}
-  .chip{
-    border:1px solid var(--line);padding:9px 16px;border-radius:2px;
-    font-size:0.92rem;color:var(--ink);background:var(--surface);
-  }
-
-  /* GALLERY */
-  .gallery{padding:70px 0;border-top:1px solid var(--line);}
-  .gallery h2.display{font-size:2rem;margin-bottom:8px;}
-  .gallery .sub{color:var(--ink-dim);margin-bottom:36px;max-width:520px;}
-  .grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
-  }
-  .card{
-    aspect-ratio:4/5;border-radius:2px;position:relative;overflow:hidden;
-    border:1px solid var(--line);display:flex;align-items:flex-end;
-  }
-  .card .label{
-    position:relative;z-index:1;padding:14px;font-size:0.88rem;color:#fbf3e2;
-    background:linear-gradient(180deg,rgba(10,7,3,0) 0%,rgba(10,7,3,0.65) 100%);
-    width:100%;
-  }
-  .art-1{background:radial-gradient(circle at 30% 30%, #e7a94f, #7a3f1d 70%);}
-  .art-2{background:linear-gradient(135deg,#3a3226 20%,#8c6c2f 55%,#f3ead9 100%);}
-  .art-3{background:conic-gradient(from 90deg at 50% 50%, #cf9a3f, #5a3a17, #cf9a3f);}
-  .art-4{background:repeating-linear-gradient(115deg,#2c2113 0 12px,#3d2c17 12px 24px);}
-  .art-5{background:radial-gradient(ellipse at 70% 20%, #f0d9a8, #3a2c17 75%);}
-  .art-6{background:linear-gradient(200deg,#111 0%, #5a4222 45%, #cf9a3f 100%);}
-
-  /* CONTACT */
-  .contact{padding:74px 0 100px;border-top:1px solid var(--line);}
-  .contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;}
-  .contact h2.display{font-size:2rem;margin-bottom:14px;}
-  .contact p.sub{color:var(--ink-dim);max-width:340px;}
-  form{display:flex;flex-direction:column;gap:16px;}
-  label{font-size:0.85rem;color:var(--ink-dim);margin-bottom:6px;display:block;}
-  input,select,textarea{
-    width:100%;background:var(--surface);border:1px solid var(--line);
-    color:var(--ink);padding:12px 14px;border-radius:2px;font-family:inherit;font-size:0.95rem;
-  }
-  input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent);}
-  textarea{resize:vertical;min-height:90px;}
-  .form-actions{display:flex;gap:14px;margin-top:6px;}
-  .form-actions button{font-family:inherit;font-size:0.95rem;}
-  #formMsg{font-size:0.88rem;min-height:1.2em;color:var(--accent);}
-
-  footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--ink-dim);font-size:0.85rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-
-  @media (max-width:760px){
-    .grid{grid-template-columns:repeat(2,1fr);}
-    .contact-grid{grid-template-columns:1fr;}
-    .nav ul{gap:16px;font-size:0.85rem;}
-  }
-  @media (max-width:480px){
-    .grid{grid-template-columns:1fr 1fr;}
-    .hero{padding:70px 0 52px;}
-  }
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto;}
-    .btn{transition:none;}
-  }
+}
+:root[data-theme="dark"]{
+  --bg:#15161a; --card-bg:#1f2024; --text:#f0f0f2; --muted:#9aa0a8; --border:#33353a;
+  --red-bg:#3a1f1f; --green-bg:#1c3324; --blue-bg:#1c2b3a;
+}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;}
+*{box-sizing:border-box;}
+.wrap{max-width:900px;margin:0 auto;padding:20px 14px 40px;}
+h1{font-size:1.4rem;text-align:center;margin:6px 0 2px;}
+.sub{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:18px;}
+.box{border-radius:14px;border:2px solid; padding:14px 14px 18px; margin-bottom:20px; overflow-x:auto;}
+.box h2{margin:0 0 10px;font-size:1.05rem;}
+.box.blue{background:var(--blue-bg);border-color:var(--blue-border);}
+.box.blue h2{color:var(--blue-head);}
+.box.green{background:var(--green-bg);border-color:var(--green-border);}
+.box.green h2{color:var(--green-head);}
+.box.red{background:var(--red-bg);border-color:var(--red-border);}
+.box.red h2{color:var(--red-head);}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:.85rem;}
+th,td{border:1px solid var(--border);padding:6px 8px;text-align:center;white-space:nowrap;}
+th{background:rgba(0,0,0,.04);}
+input[type=text],input[type=number]{width:64px;padding:4px;border:1px solid var(--border);border-radius:6px;background:var(--card-bg);color:var(--text);font-size:.85rem;text-align:center;}
+input[type=text]{width:84px;font-weight:600;}
+.total-row td{font-weight:700;background:rgba(0,0,0,.05);}
+.controls{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;}
+button{border:none;border-radius:8px;padding:7px 12px;font-size:.8rem;font-weight:600;cursor:pointer;background:var(--card-bg);border:1px solid var(--border);color:var(--text);}
+button:hover{filter:brightness(0.95);}
+ol.rank{list-style:none;margin:0;padding:0;}
+ol.rank li{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:10px;background:var(--card-bg);margin-bottom:7px;font-weight:600;}
+ol.rank li .medal{font-size:1.1rem;margin-right:8px;}
+ol.rank li .score{color:var(--blue-head);}
+.note{font-size:.75rem;color:var(--muted);margin-top:8px;}
 </style>
 </head>
 <body>
+<div class="wrap">
+  <h1>🃏 Rummy Family — Game Viewer</h1>
+  <div class="sub">Round 1 &amp; the last round are auto-doubled — same formula as the sheet</div>
 
-<header class="site">
-  <nav class="nav">
-    <div class="mark">Rishi</div>
-    <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#skills">Practice</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-<section class="hero wrap">
-  <div class="kicker">Portfolio</div>
-  <h1>Rishi</h1>
-  <p class="lede">Working across <b>3D, drawing, and painting</b> — building images that move between the digital and the handmade. Every piece starts on paper, or doesn't, depending on what it needs to become.</p>
-  <div class="cta-row">
-    <a href="#work" class="btn btn-primary">View the work</a>
-    <a href="#contact" class="btn btn-ghost">Get in touch</a>
+  <!-- BOX 1: RANK (blue) -->
+  <div class="box blue">
+    <h2>🏆 Box 1 — RANK</h2>
+    <ol class="rank" id="rankList"></ol>
+    <div class="note">Sorted lowest total first (lowest score wins in Rummy).</div>
   </div>
-</section>
 
-<section class="skills wrap" id="skills">
-  <h2>Practice</h2>
-  <div class="chip-row">
-    <span class="chip">3D Artist</span>
-    <span class="chip">Drawing Artist</span>
-    <span class="chip">Painting Artist</span>
-    <span class="chip">Sculptor</span>
-    <span class="chip">Digital Illustrator</span>
-    <span class="chip">Concept Artist</span>
-    <span class="chip">Character Designer</span>
-    <span class="chip">Portrait Artist</span>
-    <span class="chip">Sketch Artist</span>
-    <span class="chip">Mixed Media Artist</span>
+  <!-- BOX 2: Calculated scores (green) -->
+  <div class="box green">
+    <h2>✅ Box 2 — Calculated Scores (formula applied)</h2>
+    <table id="calcTable"></table>
   </div>
-</section>
 
-<section class="gallery wrap" id="work">
-  <h2 class="display">Selected work</h2>
-  <p class="sub">A cross-section of recent pieces. Swap these in for your own images when you're ready.</p>
-  <div class="grid">
-    <div class="card art-1"><div class="label">3D Render — Study 01</div></div>
-    <div class="card art-2"><div class="label">Charcoal Sketch — Portrait</div></div>
-    <div class="card art-3"><div class="label">Oil Painting — Untitled</div></div>
-    <div class="card art-4"><div class="label">Concept Art — Figure</div></div>
-    <div class="card art-5"><div class="label">Digital Illustration</div></div>
-    <div class="card art-6"><div class="label">Mixed Media — Series</div></div>
-  </div>
-</section>
-
-<section class="contact wrap" id="contact">
-  <div class="contact-grid">
-    <div>
-      <h2 class="display">Let's talk</h2>
-      <p class="sub">Commission, collaboration, or just want to say hello — send a note and it'll open straight in your mail app, addressed to Rishi.</p>
+  <!-- BOX 3: Raw score entry (red) -->
+  <div class="box red">
+    <h2>✏️ Box 3 — Raw Score Entry</h2>
+    <table id="rawTable"></table>
+    <div class="controls">
+      <button onclick="addRound()">+ Add Round</button>
+      <button onclick="removeRound()">− Remove Last Round</button>
+      <button onclick="addPlayer()">+ Add Player</button>
+      <button onclick="removePlayer()">− Remove Last Player</button>
     </div>
-    <form id="contactForm">
-      <div>
-        <label for="cname">Your name</label>
-        <input type="text" id="cname" name="cname" required>
-      </div>
-      <div>
-        <label for="creason">Reason for reaching out</label>
-        <select id="creason" name="creason" required>
-          <option value="" disabled selected>Select a reason</option>
-          <option value="Commission a piece">Commission a piece</option>
-          <option value="Buy existing work">Buy existing work</option>
-          <option value="Collaboration">Collaboration</option>
-          <option value="Exhibition / press">Exhibition / press</option>
-          <option value="Just saying hello">Just saying hello</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div>
-        <label for="cemail">Your email</label>
-        <input type="email" id="cemail" name="cemail" required>
-      </div>
-      <div>
-        <label for="cmessage">Message (optional)</label>
-        <textarea id="cmessage" name="cmessage" placeholder="A little more detail..."></textarea>
-      </div>
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Send</button>
-        <button type="button" id="cancelBtn" class="btn btn-ghost">Cancel</button>
-      </div>
-      <div id="formMsg" role="status" aria-live="polite"></div>
-    </form>
   </div>
-</section>
-
-<footer class="wrap">
-  <span>&copy; 2026 Rishi. All artwork rights reserved.</span>
-  <span>Built as a starting point — replace the email address and artwork before publishing.</span>
-</footer>
+</div>
 
 <script>
-  const form = document.getElementById('contactForm');
-  const msg = document.getElementById('formMsg');
-  const ARTIST_EMAIL = "rishi.art@example.com"; // replace with your real email
+let players = ["anne","macha","appa","anni","akka","me","ice","maha"];
+let rounds = [
+ [59,24,0,83,66,73,80,80],
+ [75,18,15,24,0,96,80,80],
+ [87,62,75,0,27,77,16,80],
+ [41,2,13,15,0,17,69,80],
+ [88,82,22,2,85,60,0,80],
+ [65,93,12,84,13,11,0,0],
+ [85,0,75,8,10,0,40,0]
+];
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    const name = document.getElementById('cname').value.trim();
-    const reason = document.getElementById('creason').value;
-    const email = document.getElementById('cemail').value.trim();
-    const message = document.getElementById('cmessage').value.trim();
+function addRound(){ rounds.push(players.map(()=>0)); render(); }
+function removeRound(){ if(rounds.length>1) rounds.pop(); render(); }
+function addPlayer(){
+  players.push("Player "+(players.length+1));
+  rounds.forEach(r=>r.push(0));
+  render();
+}
+function removePlayer(){
+  if(players.length>2){
+    players.pop();
+    rounds.forEach(r=>r.pop());
+    render();
+  }
+}
+function setName(i,val){ players[i]=val||("Player "+(i+1)); renderCalcAndRank(); }
+function setScore(r,p,val){ rounds[r][p]=parseFloat(val)||0; renderCalcAndRank(); }
 
-    if(!name || !reason || !email){
-      msg.textContent = "Please fill in your name, a reason, and your email.";
-      return;
-    }
+function multiplier(r){ return (r===0 || r===rounds.length-1) ? 2 : 1; }
 
-    const subject = encodeURIComponent(`Portfolio inquiry — ${reason} — from ${name}`);
-    const bodyLines = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Reason: ${reason}`,
-      "",
-      message || "(no additional message)"
-    ];
-    const body = encodeURIComponent(bodyLines.join("\n"));
-    window.location.href = `mailto:${ARTIST_EMAIL}?subject=${subject}&body=${body}`;
-    msg.textContent = "Opening your mail app...";
+function renderRaw(){
+  let html = "<tr><th>Round</th>"+players.map((n,i)=>`<th><input type="text" value="${n}" onchange="setName(${i},this.value)"></th>`).join("")+"</tr>";
+  rounds.forEach((r,ri)=>{
+    html += `<tr><td>${ri+1}${multiplier(ri)===2?" (x2)":""}</td>` +
+      r.map((v,pi)=>`<td><input type="number" value="${v}" onchange="setScore(${ri},${pi},this.value)"></td>`).join("") +
+      "</tr>";
   });
+  document.getElementById("rawTable").innerHTML = html;
+}
 
-  document.getElementById('cancelBtn').addEventListener('click', function(){
-    form.reset();
-    msg.textContent = "Cleared.";
+function computeTotals(){
+  return players.map((_,pi)=> rounds.reduce((sum,r,ri)=> sum + r[pi]*multiplier(ri), 0));
+}
+
+function renderCalcAndRank(){
+  const totals = computeTotals();
+
+  // Box 2: calculated table
+  let html = "<tr><th>Round</th>"+players.map(n=>`<th>${n}</th>`).join("")+"</tr>";
+  rounds.forEach((r,ri)=>{
+    html += `<tr><td>${ri+1}</td>` + r.map(v=>`<td>${v*multiplier(ri)}</td>`).join("") + "</tr>";
   });
+  html += "<tr class='total-row'><td>Total</td>" + totals.map(t=>`<td>${t}</td>`).join("") + "</tr>";
+  document.getElementById("calcTable").innerHTML = html;
+
+  // Box 1: rank list (ascending total = best)
+  const order = players.map((n,i)=>({n, t:totals[i]})).sort((a,b)=>a.t-b.t);
+  const medals = ["🥇","🥈","🥉"];
+  document.getElementById("rankList").innerHTML = order.map((o,i)=>
+    `<li><span><span class="medal">${medals[i]||(i+1)+"."}</span>${o.n}</span><span class="score">${o.t}</span></li>`
+  ).join("");
+}
+
+function render(){ renderRaw(); renderCalcAndRank(); }
+render();
 </script>
-
 </body>
 </html>
